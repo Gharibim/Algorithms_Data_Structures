@@ -10,7 +10,7 @@ Also, you will find the top questions that can be asked realted to each data str
 | Double Linked List | [DoubleList.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/DoubleList.py)  |
 | Binary Search tree (BST) | [BinarySearchTree.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/BinarySearchTree.py)  |
 | Balanced Binary Search Tree | [BalancedBinaryTree.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/BalancedBinaryTree.py)  |
-| Most important questions for BST | [Original Github repo]()  |
+| Most important questions for BST | [Binary Tree questions and solutions](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/BST_Solutions.py)  |
 | Helpful function to print Binary Tree as it looks | [print_tree_As_Tree.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/print_tree_As_Tree.py)  |
 | Trie 1 | [Trie.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/Trie.py)  |
 | Trie 2 | [Trie_2.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/Trie_2.py)  |
