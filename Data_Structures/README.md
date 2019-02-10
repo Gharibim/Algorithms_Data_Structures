@@ -5,7 +5,7 @@ Also, you will find the top questions that can be asked realted to each data str
 
 | Description  | File |
 | ------------- | ------------- |
-| Single Linked List with its questions (without getters and setters)  | [SingleList.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/SingleList.py)  |
+| Single Linked List with its questions (without getters and setters)      | [SingleList.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/SingleList.py)  |
 | Single Linked List with its questions (with getters and setters)  | [SingleList_GS.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/SingleList_GS.py)  |
 | Double Linked List | [DoubleList.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/DoubleList.py)  |
 | Binary Search tree (BST) | [BinarySearchTree.py](https://github.com/Gharibim/Algorithms_Data_Structures/blob/master/Data_Structures/Code/BinarySearchTree.py)  |
@@ -20,4 +20,4 @@ Also, you will find the top questions that can be asked realted to each data str
 **References:** </br>
 [Geeks for Geeks](https://www.geeksforgeeks.org/)</br>
 [More on Binary Trees](https://www.youtube.com/watch?v=f5dU3xoE6ms&t=13s)</br>
-[More on Binary Tries](http://pythonfiddle.com/python-trie-implementation/)</br>
+[More on Tries](http://pythonfiddle.com/python-trie-implementation/)</br>
