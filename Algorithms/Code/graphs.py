@@ -71,6 +71,32 @@ def BFS(graph, source):
 
 
 
+
+# =================BFS recursive =====================
+
+def BFSUtil(graph, queue, visited):
+	if not queue:
+		return 
+
+	vertex = queue.pop(0)
+	print(vertex)
+
+	for i in graph[vertex]:
+		if i not in visited:
+			visited.add(i)
+			queue.append(i)
+
+	BFSUtil(graph, queue, visited)
+
+def BFS(graph, source):
+	queue = [source]
+	visited = set()
+	visited.add(source)
+	for i in graph.keys():
+		BFSUtil(graph, queue, visited)
+
+
+
 #================ DFS using recursion =============
 def DFSUtil(graph, u, visited):
 	visited.add(u)
