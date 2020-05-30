@@ -349,6 +349,64 @@ def allPaths(graph, u, v):
 	path = []
 	visited = set()
 	allPathsUtil(u, v, graph, visited, path)
+	
+	
+	
+
+	
+# =======================
+
+class Cell:
+	def __init__(self, i, j):
+		self.i = i
+		self.j = j
+
+def Numms(mat):
+	row = len(mat)
+	col = len(mat[0])
+	visited = [[False for j in range(col)] for i in range(row)]
+	count = 0
+	stack = []
+
+	for x in range(row):
+		for y in range(col):
+			if visited[x][y] == False and mat[x][y] == 1: 
+				stack.insert(0, Cell(x, y))
+				DFS(stack, mat, visited)
+				count += 1
+	return count
+
+def DFS(stack, mat, visited):
+	H = len(mat)
+	L = len(mat[0])
+	rowNbr = [-1, -1, -1,  0, 0,  1, 1, 1]
+	colNbr = [-1,  0,  1, -1, 1, -1, 0, 1]
+
+	while stack:
+		vertex = stack.pop(0)
+		if vertex.i < 0 or vertex.j < 0 or vertex.i >= H or vertex.j >= L or visited[vertex.i][vertex.j] or mat[vertex.i][vertex.j] != 1:
+			continue
+		visited[vertex.i][vertex.j] = True
+		for t in range(8):
+			stack.insert(0, Cell(vertex.i+rowNbr[t], vertex.j+colNbr[t]))
+		# stack.insert(0, Cell(vertex.i, vertex.j-1))
+		# stack.insert(0, Cell(vertex.i, vertex.j+1))
+		# stack.insert(0, Cell(vertex.i-1, vertex.j))
+		# stack.insert(0, Cell(vertex.i+1, vertex.j))
+
+		# stack.insert(0, Cell(vertex.i-1, vertex.j-1))
+		# stack.insert(0, Cell(vertex.i+1, vertex.j+1))
+		# stack.insert(0, Cell(vertex.i-1, vertex.j+1))
+		# stack.insert(0, Cell(vertex.i+1, vertex.j-1))
+
+
+gg = [
+      [1,1,0,0,0],
+      [1,1,0,0,0],
+      [0,0,1,0,0],
+      [0,0,0,1,1]]
+
+print(Numms(gg))
 
 
 
