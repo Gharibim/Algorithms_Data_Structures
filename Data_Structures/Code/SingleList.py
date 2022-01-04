@@ -60,12 +60,15 @@ class Single:
 	# Delete a node
 	def delNode(self, data):
 		cur = self.head
-		if self.head.val == data:
+		if cur.val == data:
 			self.head = self.head.next
+			cur.next = None
 			return
-		while cur:
-			while cur.next and cur.next.val == data:
+		while cur.next:
+			if cur.next.val == data:
+				temp = cur.next
 				cur.next = cur.next.next
+				temp.next = None
 				return
 			cur = cur.next
 
