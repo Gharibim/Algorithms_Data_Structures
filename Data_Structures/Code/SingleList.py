@@ -39,7 +39,7 @@ class Single:
 			return
 		new_node = Node(toadd)
 		while cur:
-			while cur.next and cur.next.val == data:
+			if cur.next and cur.next.val == data:
 				new_node.next = cur.next
 				cur.next = new_node
 				return
