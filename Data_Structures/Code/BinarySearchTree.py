@@ -186,4 +186,170 @@ class BinaryTree:
 			node.data = successor.data
 			self.delNode(successor)
 
+# ==========================================
+class Node:
+	def __init__(self, val):
+		self.val = val
+		self.left = None
+		self.right = None
+		self.parent = None
+
+class BTree:
+	def __init__(self):
+		self.root = None
+
+	def _addNode(self, node, val):
+		if val <= node.val:
+			if node.left:
+				self._addNode(node.left, val)
+			else:
+				node.left = Node(val)
+				node.left.parent = node
+		else:
+			if node.right:
+				self._addNode(node.right, val)
+			else:
+				node.right = Node(val)
+				node.right.parent = node
+
+
+	def addNode(self, val):
+		if not self.root:
+			self.root = Node(val)
+		else:
+			self._addNode(self.root, val)
+
+	def _printTree(self, node):
+		if node:
+			self._printTree(node.left)
+			print(node.val, end='  ')
+			self._printTree(node.right)
+
+	def printTree(self):
+		if not self.root:
+			print("None")
+		else:
+			self._printTree(self.root)
+		print()
+
+	def _searchTree(self, node, val):
+		if node.val == val:
+			return True
+		if val < node.val:
+			if node.left:
+				return self._searchTree(node.left, val)
+		else:
+			if node.right:
+				return self._searchTree(node.right, val)
+		return False
+
+
+	def searchTree(self, val):
+		if not self.root:
+			return False
+		else:
+			return self._searchTree(self.root, val)
+
+	def _returnNode(self, node, val):
+		if node.val == val:
+			return node
+		if val < node.val:
+			if node.left:
+				return self._returnNode(node.left, val)
+		else:
+			if node.right:
+				return self._returnNode(node.right, val)
+		return None
+
+	def returnNode(self, val):
+		if not self.root:
+			return None
+		else:
+			return self._returnNode(self.root, val)
+
+	def _treeHeight(self, node, cur_height):
+		if not node:
+			return cur_height
+		left = self._treeHeight(node.left, cur_height+1)
+		right = self._treeHeight(node.right, cur_height+1)
+		return max(left, right)
+
+	def treeHeight(self):
+		if not self.root:
+			return 0
+		return self._treeHeight(self.root, 0)
+
+	def nodeHeight(self, val):
+		node = self.returnNode(val)
+		return self._treeHeight(node, 0)
+
+	def minValue(self, node):
+		cur = node
+		while cur:
+			if not cur.left:
+				break
+			cur = cur.left
+		return cur
+
+	def getSuccessor(self, node):
+		if node.right:
+			return self.minValue(node.right)
+		cur = node.parent
+		while cur:
+			if node != cur.right:
+					break
+			node = cur
+			cur = cur.parent
+		return cur
+
+
+	def delValue(self, val):
+		node = self.returnNode(val)
+		self.delNode(node)
+
+	def delNode(self, node):
+
+		def numChilds(node):
+			if node.left and node.right:
+				return 2
+			if not node.left and not node.right:
+				return 0
+			return 1
+
+		if numChilds(node) == 0:
+			if node.parent.left == node:
+				node.parent.left = None
+			else:
+				node.parent.right = None
+			node.parent = None
+
+		elif numChilds(node) == 1:
+			node_child = None
+
+			if node.left:
+				node_child = node.left
+			else:
+				node_child = node.right
+
+			if node.parent:
+
+				if node.parent.left == node:
+					node.parent.left = node_child
+					node_child.parent = node.parent
+				else:
+					node.parent.right = node_child
+					node_child.parent = node.parent
+			else:
+				if node.left:
+					self.root = node.left
+					node.left.parent = None
+				else:
+					self.root = node.right
+					node.right.parent = None
+
+		else:
+			successor = self.getSuccessor(node)
+			node.val = successor.val
+			self.delNode(successor)
+
 			
