@@ -806,6 +806,22 @@ Output: If s = 22 then True. If s = 77 Then false
 '''
 
 def hasPathSum(root, s):
+    if root == None:
+        return False
+
+    subSum = s - root.data
+
+    if subSum == 0 and root.left == None and root.right == None:
+        return True
+
+    left = hasPathSum(root.left, subSum)
+    right = hasPathSum(root.right, subSum)
+
+    return left or right
+
+# =======
+
+def hasPathSum(root, s):
 	if root == None:
 		return 0
 
