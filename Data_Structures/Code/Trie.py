@@ -139,7 +139,86 @@ class Trie:
 
 
 
+========
+class Node:
+	num_of_words = 0
+	def __init__(self, char):
+		self.char = char
+		self.children = {}
+		self.isEnd = False
 
+class Trie:
+	def __init__(self):
+		self.root = Node('')
+
+	def addWord(self, word):
+		cur = self.root
+		for char in word:
+			if char in cur.children:
+				cur = cur.children[char]
+			else:
+				cur.children[char] = Node(char)
+				cur = cur.children[char]
+		cur.isEnd = True
+		Node.num_of_words += 1
+
+	def _printAllWords(self, cur, partial_word, all_words):
+		for char in cur.children:
+			new_word = partial_word + char
+			if cur.children[char].isEnd:
+				all_words.append(new_word)
+			self._printAllWords(cur.children[char], new_word, all_words)
+
+	def printAllWords(self):
+		cur = self.root
+		all_words = []
+
+		for char in cur.children:
+			temp = char
+			if cur.children[char].isEnd:
+				all_words.append(temp)
+			self._printAllWords(cur.children[char], temp, all_words)
+		return all_words
+
+	def seachTrie(self, word):
+		cur = self.root
+		for char in word:
+			if char in cur.children:
+				cur = cur.children[char]
+			else:
+				return False
+		if cur.isEnd:
+			return True
+		return False
+
+	def _autoComplete(self, cur, partial_word, all_words):
+		for char in cur.children:
+			new_word = partial_word + char
+			if cur.children[char].isEnd:
+				all_words.append(new_word)
+			self._autoComplete(cur.children[char], new_word, all_words)
+
+	def autoComplete(self, word):
+		cur = self.root
+		all_words = []
+		for char in word:
+			if char in cur.children:
+				cur = cur.children[char]
+			else:
+				return all_words
+		if cur.isEnd:
+			all_words.append(word)
+		self._autoComplete(cur, word, all_words)
+		print('allword', all_words)
+		return all_words
+
+	def longestCommonPrefix(self):
+		longestCommonPrefix = ''
+		cur = self.root
+		while len(cur.children) == 1 and not cur.isEnd:
+			cur = cur.children[list(cur.children.keys())[0]]
+			longestCommonPrefix += cur.char
+		return longestCommonPrefix or -1
 
 
 
