@@ -229,5 +229,312 @@ def removeN(A, B):
 	return A
 
 
+# =============================================
+
+class Node:
+	def __init__(self, data):
+		self.next = None
+		self.data = data
+
+class LinkedList:
+	def __init__(self):
+		self.head = None
+
+	def addHead(self, data):
+		if not self.head:
+			self.head = Node(data)
+			return
+		temp = Node(data)
+		temp.next = self.head
+		self.head = temp
+
+	def printList(self):
+		if not self.head:
+			print("nothing to print")
+			return
+		cur = self.head
+		while cur:
+			print(cur.data, end=' ')
+			cur = cur.next
+		print()
+
+	def addAfter(self, aft, data):
+		if not self.head:
+			self.addHead(data)
+			return
+		cur = self.head
+		while cur:
+			if cur.data == aft:
+				temp = Node(data)
+				temp.next = cur.next
+				cur.next = temp
+				return
+			cur = cur.next
+
+	def addBefore(self, bfr, data):
+		if not self.head:
+			self.addHead(data)
+			return
+		if self.head.data == bfr:
+			self.addHead(data)
+			return
+		cur = self.head
+		while cur.next:
+			if cur.next.data == bfr:
+				temp = Node(data)
+				temp.next = cur.next
+				cur.next = temp
+				return
+			cur = cur.next
+
+	def delNode(self, data):
+		if not self.head:
+			return
+		if self.head.data == data:
+			self.head = self.head.next
+			return
+		cur = self.head
+		while cur.next:
+			if cur.next.data == data:
+				cur.next = cur.next.next
+				return
+			cur = cur.next
+
+	def delDuplicates(self):
+		if not self.head:
+			return
+		cur = self.head
+		while cur:
+			if cur.next and cur.data == cur.next.data:
+				cur.next = cur.next.next
+				continue
+			cur = cur.next
+
+	def addEnd(self, data):
+		if not self.head:
+			self.addHead(data)
+			return
+		cur = self.head
+		while cur.next:
+			cur = cur.next
+		temp = Node(data)
+		cur.next = temp
+
+	def reverseList(self):
+		if not self.head:
+			return
+		prev = None
+		cur = self.head
+		while cur:
+			Next = cur.next
+			cur.next = prev
+			prev = cur
+			cur = Next
+		self.head = prev
+
+
+	def reverseNumber(self, num):
+		if not self.head:
+			return
+		prev = None
+		cur = self.head
+		count = 0
+		Next = None
+		while cur:
+			if not (count < num):
+				break
+			Next = cur.next
+			cur.next = prev
+			prev = cur
+			cur = Next
+			count += 1
+		self.head.next = Next
+		self.head = prev
+
+	def reversely(self, head, num):
+		if not head:
+			return
+		cur = head
+		prev = None
+		count = 0
+		Next = None
+		while cur:
+			if not (count < num):
+				break
+			Next = cur.next
+			cur.next = prev
+			prev = cur
+			cur = Next
+			count += 1
+		head.next = self.reversely(Next, num)
+		head = prev
+		return head
+
+	def makeCir(self, data):
+		if not self.head:
+			return
+		ptr = None
+		cur = self.head
+		while cur.next:
+			if cur.data == data:
+				ptr = cur
+			cur = cur.next
+		cur.next = ptr
+
+	def detectCir(self):
+		if not self.head:
+			return
+		slow = self.head
+		fast = self.head
+		while fast.next.next:
+			if fast == slow:
+				return slow
+			slow = slow.next
+			fast = fast.next.next
+		return False
+
+	def delCir(self, cir_ptr):
+		if not self.head:
+			return
+		cur = self.head
+		while True:
+			cur = cur.next
+			if cir_ptr.next == cur:
+				cir_ptr.next = None
+				return
+			else:
+				cir_ptr = cir_ptr.next
+
+	def simpleAdd(self, head2):
+		if not self.head and not head2:
+			return
+		if not self.head:
+			return head2
+		if not head2:
+			return self.head
+
+		result = LinkedList()
+		h1 = self.head
+		h2 = head2.head
+		while h1 or h2:
+			temp_sum = 0
+			if h1:
+				temp_sum += h1.data
+				h1 = h1.next
+			if h2:
+				temp_sum += h2.data
+				h2 = h2.next
+			result.addEnd(temp_sum)
+		return result
+
+	def addHard(self, head2):
+		if not self.head and not head2:
+			return
+		if not self.head:
+			return head2
+		if not head2:
+			return self.head
+		h1 = self.head
+		h2 = head2.head
+		result = LinkedList()
+		carry = 0
+		while h1 or h2 or carry:
+			total_sum = carry
+			if h1:
+				total_sum += h1.data
+				h1 = h1.next
+			if h2:
+				total_sum += h2.data
+				h2 = h2.next
+			carry, res = divmod(total_sum, 10)
+			result.addEnd(res)
+		return result
+
+	def mergeListsInPlace(self, head2):
+		if not self.head and not head2:
+			return
+		if not self.head:
+			return head2
+		if not head2:
+			return self.head
+		h1 = self.head
+		h2 = head2.head
+		h1_next = None
+		h2_next = None
+		while h1.next and h2.next:
+			h1_next = h1.next
+			h1.next = h2
+			h1 = h1_next
+
+			h2_next = h2.next
+			h2.next = h1
+			h2 = h2_next
+		if h1.next:
+			h2.next = h1
+		if h2.next:
+			h1.next = h2
+
+	def mergeLists(self, head2):
+		if not self.head and not head2:
+			return
+		if not self.head:
+			return head2
+		if not head2:
+			return self.head
+		result = LinkedList()
+		result.addHead(0)
+		cur = result.head
+		h1 = self.head
+		h2 = head2.head
+		h1_next = None
+		h2_next = None
+		while h1.next and h2.next:
+			h1_next = h1.next
+			h2_next = h2.next
+			cur.next = h1
+			cur = cur.next
+			cur.next = h2
+			cur = cur.next
+			h1 = h1_next
+			h2 = h2_next
+		if h1:
+			cur.next = h1
+			cur = cur.next
+		if h2:
+			cur.next = h2
+		return result
+
+	def mergeTwoSortedLists(self, head2):
+		if not self.head and not head2:
+			return
+		if not self.head:
+			return head2
+		if not head2:
+			return self.head
+		result = LinkedList()
+		result.addHead(0)
+		cur = result.head
+		h1 = self.head
+		h2 = head2.head
+		h1_next = None
+		h2_next = None
+		while h1 and h2:
+			h1_next = h1.next
+			h2_next = h2.next
+			if h1.data <= h2.data:
+				cur.next = h1
+				cur = cur.next
+				h1 = h1_next
+			else:
+				cur.next = h2
+				cur = cur.next
+				h2 = h2_next
+
+		if h1:
+			cur.next = h1
+		if h2:
+			cur.next = h2
+		return result
+
 
 
