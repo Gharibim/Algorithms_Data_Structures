@@ -352,4 +352,57 @@ class BTree:
 			node.val = successor.val
 			self.delNode(successor)
 
-			
+# ===============
+def InorderSuccessor(self, data):
+		node = self.getNodeFromValue(data)
+		if node.right:
+			return self.getMinNode(node.right)
+		cur = node
+		while cur:
+			if node.parent.left == cur:
+				return node.parent
+			cur = cur.parent
+
+	def InorderSuccFromRoot(self, root, data):
+		node = self.getNodeFromValue(data)
+		if node.right:
+			return self.getMinNode(node.right)
+		succ = None
+		while root:
+			if data < root.data:
+				succ = root
+				root = root.left
+			elif data > root.data:
+				root = root.right
+			else:
+				break
+		return succ
+
+	def PreorderSuccessor(self, data):
+		node = self.getNodeFromValue(data)
+		if node.left:
+			return node.left
+		if node.right:
+			return node.right
+		if node.parent.right:
+			return node.parent.right
+		cur = node
+		while cur.parent:
+			if cur.parent.left == cur:
+				if cur.parent.right:
+					return cur.parent.right
+				else:
+					return None
+			cur = cur.parent
+
+	def PostorderSuccessor(self, data):
+		node = self.getNodeFromValue(data)
+		if not node.parent:
+			return None
+		if node.parent.right == node:
+			return node.parent
+		if node.parent.left == node:
+			if not node.parent.right:
+				return node.parent
+		 	else:
+				return self.getMinNode(node.parent.right)
